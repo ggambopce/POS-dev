@@ -1,0 +1,46 @@
+// 포스사용자
+CREATE TABLE STAFF (
+  user_id   NUMBER PRIMARY KEY,
+  password  NUMBER NOT NULL
+);
+
+// 물품
+CREATE TABLE PRODUCT (
+    product_id     NUMBER       PRIMARY KEY,
+    product_name   VARCHAR2(100) NOT NULL,
+    manufacturer   VARCHAR2(100) NOT NULL,
+    expiry_date    DATE,
+    adult_only     CHAR(1)       CHECK (adult_only IN ('Y', 'N')),
+    price          NUMBER        NOT NULL,
+    received_date  DATE,
+    stock          NUMBER        NOT NULL
+);
+
+// 구매
+CREATE TABLE PURCHASE (
+    purchase_id    NUMBER      PRIMARY KEY,
+    purchase_time  DATE
+);
+
+// 구매상세 물품구매 자식테이블
+CREATE TABLE PURCHASE_DETAIL (
+    purchase_detail_id   NUMBER      PRIMARY KEY,
+    purchase_quantity    NUMBER      NOT NULL,
+    purchase_id          NUMBER      NOT NULL,
+    product_id           NUMBER      NOT NULL,
+    FOREIGN KEY (purchase_id) REFERENCES PURCHASE(purchase_id),
+    FOREIGN KEY (product_id)  REFERENCES PRODUCT(product_id)
+);
+
+// 정보
+CREATE TABLE INFOMATION (
+  info_id             NUMBER        PRIMARY KEY,
+  complete_total_sales NUMBER       NOT NULL,
+  complete_wage       NUMBER        NOT NULL,
+  complete_balance    NUMBER        NOT NULL,
+  login_time          DATE,
+  complete_time       DATE,
+  user_id             NUMBER        NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES STAFF(user_id)
+);
+
