@@ -1,4 +1,4 @@
-package model;
+package purchase;
 
 import java.util.Date;
 

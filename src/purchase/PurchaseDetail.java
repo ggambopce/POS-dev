@@ -1,4 +1,4 @@
-package model;
+package purchase;
 
 public class PurchaseDetail {
     int purchaseDetailId;       // 구매상세 id
