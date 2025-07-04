@@ -10,10 +10,10 @@ public class Product {
     char adultOnly;
     int price;
     Date receivedDate;
-    String stock;
+    int stock;
 
 
-    public Product(int productId, String productName, String manufacturer, Date expiryDate, char adultOnly, int price, Date receivedDate, String stock) {
+    public Product(int productId, String productName, String manufacturer, Date expiryDate, char adultOnly, int price, Date receivedDate, int stock) {
         this.productId = productId;
         this.productName = productName;
         this.manufacturer = manufacturer;
@@ -81,11 +81,11 @@ public class Product {
         this.receivedDate = receivedDate;
     }
 
-    public String getStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(String stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 }

@@ -10,14 +10,12 @@ public class InformationDao {
 
     // 로그인 시 저장되는 정보
     public void saveLoginInfo(int userId, Date now) {
-        Information information = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-
         try {
             connection = DBConnection.getConnection();
-            String sql = "INSERT INTO INFORMATION (user_id, login_time) VALUES (?, ?)";
+            String sql = "INSERT INTO INFORMATION (information_id, user_id, login_time) VALUES (INFORMATION_SEQ.NEXTVAL,?, ?)";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, userId);
             preparedStatement.setTimestamp(2, new Timestamp(now.getTime()));
