@@ -1,0 +1,6 @@
+// 사용자 임시 데이터 저장
+INSERT INTO STAFF (user_id, password) VALUES (1, '1234');
+
+// 로그인 기능 확인
+SELECT user_id, password, user_name FROM STAFF WHERE user_id = 1 AND password = 1234;
+
