@@ -4,3 +4,63 @@ INSERT INTO STAFF (user_id, password) VALUES (1, '1234');
 // 로그인 기능 확인
 SELECT user_id, password, user_name FROM STAFF WHERE user_id = 1 AND password = 1234;
 
+// 상품 테이블 임시 데이터
+INSERT INTO PRODUCT VALUES (1, '서울우유', '서울우유', 'N', 2000, 10);
+INSERT INTO PRODUCT VALUES (2, '초코파이', '오리온', 'N', 1500, 20);
+INSERT INTO PRODUCT VALUES (3, '불닭볶음면', '삼양', 'N', 1300, 30);
+INSERT INTO PRODUCT VALUES (4, '참이슬', '하이트진로', 'Y', 1800, 25);
+INSERT INTO PRODUCT VALUES (5, '카스', 'OB맥주', 'Y', 2000, 20);
+INSERT INTO PRODUCT VALUES (6, '바나나우유', '빙그레', 'N', 1700, 15);
+INSERT INTO PRODUCT VALUES (7, '포카칩', '오리온', 'N', 2200, 12);
+INSERT INTO PRODUCT VALUES (8, '진라면', '오뚜기', 'N', 1000, 40);
+INSERT INTO PRODUCT VALUES (9, '초코칩쿠키', '롯데', 'N', 1600, 18);
+INSERT INTO PRODUCT VALUES (10, '카누커피', '동서식품', 'N', 4500, 22);
+INSERT INTO PRODUCT VALUES (11, '레쓰비', '롯데칠성', 'N', 1000, 25);
+INSERT INTO PRODUCT VALUES (12, '허니버터칩', '해태', 'N', 2300, 17);
+INSERT INTO PRODUCT VALUES (13, '콘칩', '오리온', 'N', 2000, 14);
+INSERT INTO PRODUCT VALUES (14, '2% 부족할 때', '롯데칠성', 'N', 1800, 10);
+INSERT INTO PRODUCT VALUES (15, '마이쮸', '롯데', 'N', 500, 50);
+INSERT INTO PRODUCT VALUES (16, '테라', '하이트진로', 'Y', 1900, 22);
+INSERT INTO PRODUCT VALUES (17, '삼각김밥', 'CJ', 'N', 1200, 28);
+INSERT INTO PRODUCT VALUES (18, '컵누들', '농심', 'N', 1100, 19);
+INSERT INTO PRODUCT VALUES (19, '비타500', '광동제약', 'N', 1300, 35);
+INSERT INTO PRODUCT VALUES (20, '핫식스', '롯데칠성', 'N', 1500, 24);
+
+
+// 재고 테이블 임시 데이터
+-- 서울우유 - 유통기한 지난 재고
+INSERT INTO STOCK VALUES (1, 1, TO_DATE('2024-12-01', 'YYYY-MM-DD'), TO_DATE('2025-06-30', 'YYYY-MM-DD'), 5);
+-- 서울우유 - 유통기한 남은 재고
+INSERT INTO STOCK VALUES (2, 1, TO_DATE('2025-07-01', 'YYYY-MM-DD'), TO_DATE('2025-07-20', 'YYYY-MM-DD'), 8);
+-- 초코파이 - 재고 넉넉히
+INSERT INTO STOCK VALUES (3, 2, TO_DATE('2025-07-01', 'YYYY-MM-DD'), TO_DATE('2025-12-31', 'YYYY-MM-DD'), 20);
+-- 불닭볶음면 - 임박
+INSERT INTO STOCK VALUES (4, 3, TO_DATE('2025-07-03', 'YYYY-MM-DD'), TO_DATE('2025-07-08', 'YYYY-MM-DD'), 10);
+-- 참이슬 - 유통기한 넉넉
+INSERT INTO STOCK VALUES (5, 4, TO_DATE('2025-07-01', 'YYYY-MM-DD'), TO_DATE('2026-01-01', 'YYYY-MM-DD'), 30);
+-- 카스 - 지난 재고
+INSERT INTO STOCK VALUES (6, 5, TO_DATE('2025-05-01', 'YYYY-MM-DD'), TO_DATE('2025-06-15', 'YYYY-MM-DD'), 7);
+-- 바나나우유 - 3일 남음
+INSERT INTO STOCK VALUES (7, 6, TO_DATE('2025-07-04', 'YYYY-MM-DD'), TO_DATE('2025-07-10', 'YYYY-MM-DD'), 12);
+-- 포카칩 - 정상 재고
+INSERT INTO STOCK VALUES (8, 7, TO_DATE('2025-07-01', 'YYYY-MM-DD'), TO_DATE('2025-09-01', 'YYYY-MM-DD'), 15);
+-- 진라면 - 장기 재고
+INSERT INTO STOCK VALUES (9, 8, TO_DATE('2025-06-25', 'YYYY-MM-DD'), TO_DATE('2026-06-01', 'YYYY-MM-DD'), 50);
+-- 초코칩쿠키 - 오늘까지
+INSERT INTO STOCK VALUES (10, 9, TO_DATE('2025-07-01', 'YYYY-MM-DD'), SYSDATE, 9);
+
+// 제품 목록 조회
+SELECT
+    p.product_id,
+    p.product_name,
+    p.manufacturer,
+    p.adult_only,
+    p.price,
+    NVL(SUM(CASE
+        WHEN s.expiry_date >= SYSDATE THEN s.quantity
+        ELSE 0
+    END), 0) AS stock
+FROM PRODUCT p
+LEFT JOIN STOCK s ON p.product_id = s.product_id
+GROUP BY p.product_id, p.product_name, p.manufacturer, p.adult_only, p.price
+ORDER BY p.product_id;

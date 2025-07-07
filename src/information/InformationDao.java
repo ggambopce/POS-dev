@@ -84,5 +84,4 @@ public class InformationDao {
             try { if (connection != null) connection.close(); } catch (Exception ignored) {}
         }
     }
-
 }

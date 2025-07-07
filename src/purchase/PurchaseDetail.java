@@ -3,16 +3,18 @@ package purchase;
 public class PurchaseDetail {
     int purchaseDetailId;       // 구매상세 id
     int purchaseQuantity;       // 구매수량 id
+    int stockId;                // 어떤 입고 건에서 차감된 판매인지 추적
 
     // 외래키
     int purchaseId;
     int productId;
 
-    public PurchaseDetail(int purchaseDetailId, int purchaseQuantity, int purchaseId, int productId) {
+    public PurchaseDetail(int purchaseDetailId, int purchaseQuantity, int purchaseId, int productI, int stockId) {
         this.purchaseDetailId = purchaseDetailId;
         this.purchaseQuantity = purchaseQuantity;
         this.purchaseId = purchaseId;
         this.productId = productId;
+        this.stockId = stockId;
     }
 
     public int getPurchaseDetailId() {
@@ -45,5 +47,13 @@ public class PurchaseDetail {
 
     public void setProductId(int productId) {
         this.productId = productId;
+    }
+
+    public int getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(int stockId) {
+        this.stockId = stockId;
     }
 }

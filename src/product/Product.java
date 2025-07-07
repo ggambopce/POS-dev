@@ -6,21 +6,16 @@ public class Product {
     int productId;
     String productName;
     String manufacturer;
-    Date expiryDate;
     char adultOnly;
     int price;
-    Date receivedDate;
-    int stock;
+    int stock;              // 유통기한 안 지난 재고 수량
 
-
-    public Product(int productId, String productName, String manufacturer, Date expiryDate, char adultOnly, int price, Date receivedDate, int stock) {
+    public Product(int productId, String productName, String manufacturer, char adultOnly, int price, int stock) {
         this.productId = productId;
         this.productName = productName;
         this.manufacturer = manufacturer;
-        this.expiryDate = expiryDate;
         this.adultOnly = adultOnly;
         this.price = price;
-        this.receivedDate = receivedDate;
         this.stock = stock;
     }
 
@@ -49,13 +44,6 @@ public class Product {
         this.manufacturer = manufacturer;
     }
 
-    public Date getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(Date expiryDate) {
-        this.expiryDate = expiryDate;
-    }
 
     public char getAdultOnly() {
         return adultOnly;
@@ -73,19 +61,7 @@ public class Product {
         this.price = price;
     }
 
-    public Date getReceivedDate() {
-        return receivedDate;
-    }
+    public int getStock() {return stock;}
 
-    public void setReceivedDate(Date receivedDate) {
-        this.receivedDate = receivedDate;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
+    public void setStock(int stock) {this.stock = stock;}
 }

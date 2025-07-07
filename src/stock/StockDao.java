@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class StockDao {
 
@@ -35,4 +36,9 @@ public class StockDao {
         return remaining == 0; // true면 성공, false면 재고 부족
     }
 
+    public List<Stock> findAvailableStocksByProductId(int productId, int quantity) {
+    }
+
+    public void updateQuantity(int stockId, int i) {
+    }
 }

@@ -18,10 +18,6 @@ public class ProductController {
             System.out.print("제조사 입력: ");
             String manufacturer = sc.nextLine();
 
-            System.out.print("유통기한 입력 (yyyy-MM-dd): ");
-            String expiry = sc.nextLine();
-            Date expiryDate = new SimpleDateFormat("yyyy-MM-dd").parse(expiry);
-
             System.out.print("성인 전용 여부 입력 (Y/N): ");
             char adultOnly = sc.nextLine().toUpperCase().charAt(0);
             if (adultOnly != 'Y' && adultOnly != 'N') {
@@ -32,13 +28,9 @@ public class ProductController {
             System.out.print("가격 입력: ");
             int price = sc.nextInt();
 
-            System.out.print("입고 수량 입력: ");
-            int stock = sc.nextInt();
-            sc.nextLine();
-
             Date receivedDate = new Date();
 
-            Product product = new Product(0, productName, manufacturer, expiryDate, adultOnly, price, receivedDate, stock);
+            Product product = new Product(0, productName, manufacturer,adultOnly, price);
             productDao.saveProduct(product);
 
         } catch (ParseException e) {
