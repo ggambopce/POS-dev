@@ -54,9 +54,6 @@ public class PurchaseController {
             for (Stock stock : availableStocks) {
                 int deductQty = Math.min(remaining, stock.getQuantity());
 
-                // 차감 반영
-                stockDao.updateQuantity(stock.getStockId(), stock.getQuantity() - deductQty);
-
                 // 상세 기록 추가 (stockId 포함)
                 details.add(new PurchaseDetail(0, deductQty, 0, product.getProductId(), stock.getStockId()));
 
@@ -79,6 +76,10 @@ public class PurchaseController {
 
         System.out.printf("총 결제 금액: %,d원%n", totalAmount);
 
+        // 구매 테이블 저장
+        Purchase purchase = new Purchase(0, new Date(), totalAmount);
+        purchaseDao.savePurchase(purchase, details);
+
         System.out.print("결제 방식 (1: card / 2: cash): ");
         String method = sc.nextLine();
 
@@ -100,10 +101,6 @@ public class PurchaseController {
             System.out.println("지원하지 않는 결제 방식입니다.");
             return;
         }
-
-        // 구매 테이블 저장
-        Purchase purchase = new Purchase(0, new Date(), totalAmount);
-        purchaseDao.savePurchase(purchase, details);
 
         // 결과 출력
         for (PurchaseDetail detail : details) {

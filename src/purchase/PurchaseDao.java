@@ -29,22 +29,6 @@ public class PurchaseDao {
             conn = DBConnection.getConnection();
             conn.setAutoCommit(false); // 트랜젝션 시작
 
-            // 0. totalAmount 계산
-            String priceSql = "SELECT price FROM PRODUCT WHERE product_id = ?";
-            priceStmt = conn.prepareStatement(priceSql);
-
-            int totalAmount = 0;
-            for (PurchaseDetail detail : details) {
-                priceStmt.setInt(1, detail.getProductId());
-                try (ResultSet rs = priceStmt.executeQuery()) {
-                    if (rs.next()) {
-                        int unitPrice = rs.getInt("price");
-                        totalAmount += unitPrice * detail.getPurchaseQuantity();
-                    } else {
-                        throw new RuntimeException("상품 가격 조회 실패: " + detail.getProductId());
-                    }
-                }
-            }
 
             // 1. Purchase 저장
             String purchaseSql = """
@@ -52,18 +36,20 @@ public class PurchaseDao {
                 VALUES (PURCHASE_SEQ.NEXTVAL, ?, ?)
             """;
 
-            purchaseStmt = conn.prepareStatement(purchaseSql, new String[]{"purchase_id"});
+            purchaseStmt = conn.prepareStatement(purchaseSql);
             purchaseStmt.setTimestamp(1, new Timestamp(purchase.getPurchaseTime().getTime()));
-            purchaseStmt.setInt(2, totalAmount);
+            purchaseStmt.setInt(2, purchase.totalAmount);
             purchaseStmt.executeUpdate();
 
-            // 2. 생성된 purchase_id 얻기
-            ResultSet rs = purchaseStmt.getGeneratedKeys();
+            // 2. 생성된 purchase_id 얻기 (Oracle 방식)
             int generatedPurchaseId = 0;
-            if (rs.next()) {
-                generatedPurchaseId = rs.getInt(1);
-            } else {
-                throw new RuntimeException("구매 ID 생성 실패");
+            try (PreparedStatement seqStmt = conn.prepareStatement("SELECT PURCHASE_SEQ.CURRVAL FROM DUAL");
+                 ResultSet rs = seqStmt.executeQuery()) {
+                if (rs.next()) {
+                    generatedPurchaseId = rs.getInt(1);
+                } else {
+                    throw new RuntimeException("구매 ID 생성 실패: CURRVAL 조회 실패");
+                }
             }
 
             // 3. PurchaseDetail 저장
@@ -99,6 +85,17 @@ public class PurchaseDao {
                 stockUpdateStmt.addBatch();
             }
             stockUpdateStmt.executeBatch();
+
+            //5. STOCK.quantity 유통기한이 안지난 것중에 가장 빠른것 감소 처리 추가
+            String quantityUpdateSql = "UPDATE STOCK SET quantity = quantity - ? WHERE stock_id = ?";
+            PreparedStatement stockQuantityStmt = conn.prepareStatement(quantityUpdateSql);
+            for (PurchaseDetail detail : details) {
+                stockQuantityStmt.setInt(1, detail.getPurchaseQuantity());
+                stockQuantityStmt.setInt(2, detail.getStockId());
+                stockQuantityStmt.addBatch();
+            }
+            stockQuantityStmt.executeBatch();
+
 
             conn.commit(); // 트랜잭션 커밋
             System.out.println("구매 및 상세 저장 완료");

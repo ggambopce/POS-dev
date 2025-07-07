@@ -65,13 +65,8 @@ public class ProductDao {
                 p.manufacturer,
                 p.adult_only,
                 p.price,
-                NVL(SUM(CASE
-                    WHEN s.expiry_date >= SYSDATE THEN s.quantity
-                    ELSE 0
-                END), 0) AS stock
+                p.stock
             FROM PRODUCT p
-            LEFT JOIN STOCK s ON p.product_id = s.product_id
-            GROUP BY p.product_id, p.product_name, p.manufacturer, p.adult_only, p.price
             ORDER BY p.product_id
         """;
         try (
@@ -108,14 +103,14 @@ public class ProductDao {
                 p.price,
                 p.stock
             FROM PRODUCT p
-            WHERE p.product_name LIKE ?
+            WHERE p.product_name = ?
         """;
 
         try (
                 Connection connection = DBConnection.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)
         ) {
-            preparedStatement.setString(1, "%" + productName + "%");
+            preparedStatement.setString(1, productName);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     product = new Product(

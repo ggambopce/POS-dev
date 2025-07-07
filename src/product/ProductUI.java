@@ -1,7 +1,6 @@
 package product;
 
 import purchase.PurchaseController;
-import purchase.PurchaseUI;
 import stock.StockController;
 
 import java.util.Scanner;
@@ -9,7 +8,6 @@ import java.util.Scanner;
 public class ProductUI {
     private final Scanner sc = new Scanner(System.in);
     private final ProductController controller = new ProductController();
-    private final PurchaseUI purchaseUI = new PurchaseUI();
     private final PurchaseController purchaseController = new PurchaseController();
     private final StockController stockController = new StockController();
 
@@ -28,7 +26,7 @@ public class ProductUI {
             sc.nextLine();
 
             switch (choice) {
-                case 1 -> purchaseUI.showMenu(purchaseController);
+                case 1 -> purchaseController.purchaseProduct();
                 case 2 -> stockController.registerStock();
                 case 3 -> controller.showAllProducts();
                 case 4 -> controller.searchByProductName();

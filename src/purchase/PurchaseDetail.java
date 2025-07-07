@@ -9,7 +9,7 @@ public class PurchaseDetail {
     int purchaseId;
     int productId;
 
-    public PurchaseDetail(int purchaseDetailId, int purchaseQuantity, int purchaseId, int productI, int stockId) {
+    public PurchaseDetail(int purchaseDetailId, int purchaseQuantity, int purchaseId, int productId, int stockId) {
         this.purchaseDetailId = purchaseDetailId;
         this.purchaseQuantity = purchaseQuantity;
         this.purchaseId = purchaseId;

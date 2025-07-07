@@ -43,14 +43,27 @@ public class ProductController {
             System.out.println("등록된 제품이 없습니다.");
             return;
         }
+        System.out.println("==============================================================================");
+        System.out.printf("%-4s | %-10s | %-10s | %-8s | %-8s | %-5s%n",
+                "ID", "제품명", "제조사", "성인전용", "가격", "재고");
+        System.out.println("------------------------------------------------------------------------------");
+
         for (Product p : products) {
-            printProduct(p);
+            System.out.printf("%-4d | %-10s | %-10s | %-8s | %,8d원 | %3d개%n",
+                    p.getProductId(),
+                    p.getProductName(),
+                    p.getManufacturer(),
+                    p.getAdultOnly() == 'Y' ? "19세 이상" : "모두 가능",
+                    p.getPrice(),
+                    p.getStock());
         }
+
+        System.out.println("==============================================================================");
     }
 
 
     private void printProduct(Product p) {
-
+        String stars = "*".repeat(p.getStock());
         System.out.printf("""
         -------------------------------
         제품ID: %d
@@ -58,7 +71,7 @@ public class ProductController {
         제조사: %s
         성인전용: %s
         가격: %,d원
-        재고: %d개
+        재고: %s (%d개)
         -------------------------------
         """,
                 p.getProductId(),
@@ -66,8 +79,10 @@ public class ProductController {
                 p.getManufacturer(),
                 p.getAdultOnly() == 'Y' ? "19세 이상" : "모두 가능",
                 p.getPrice(),
+                stars,
                 p.getStock());
     }
+
 
     public void searchByProductName() {
         System.out.print("검색할 제품이름: ");
