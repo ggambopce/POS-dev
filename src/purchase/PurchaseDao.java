@@ -8,6 +8,10 @@ import java.util.List;
 public class PurchaseDao {
     /**
      * 구매 서비스 로직
+     * Purchase 클래스 totalAmount에 반영
+     * PurchaseDetail 클래스에 반영
+     * Stock 클래스의 유통기한이 남은 것중 가장 현재날까에 가까운 quantity 에서 차감
+     * Product 클래스 stock 하락 반영
      * @param purchase
      * @param details
      */
@@ -16,8 +20,10 @@ public class PurchaseDao {
         PreparedStatement purchaseStmt = null;
         PreparedStatement detailStmt = null;
         PreparedStatement priceStmt = null;
+        PreparedStatement stockUpdateStmt = null;
+
         /**
-         * 두 개의 테이블을 하나의 로직에서 작업하기때문에 트랜잭션 사용
+         * 여러개의 테이블을 하나의 로직에서 작업하기때문에 트랜잭션 사용
          */
         try {
             conn = DBConnection.getConnection();
@@ -83,8 +89,18 @@ public class PurchaseDao {
             }
 
             detailStmt.executeBatch();
-            conn.commit(); // 트랜잭션 커밋
 
+            // 4. PRODUCT.stock 감소 처리 추가
+            String stockUpdateSql = "UPDATE PRODUCT SET stock = stock - ? WHERE product_id = ?";
+            stockUpdateStmt = conn.prepareStatement(stockUpdateSql);
+            for (PurchaseDetail detail : details) {
+                stockUpdateStmt.setInt(1, detail.getPurchaseQuantity());
+                stockUpdateStmt.setInt(2, detail.getProductId());
+                stockUpdateStmt.addBatch();
+            }
+            stockUpdateStmt.executeBatch();
+
+            conn.commit(); // 트랜잭션 커밋
             System.out.println("구매 및 상세 저장 완료");
 
         } catch (Exception e) {
@@ -98,6 +114,7 @@ public class PurchaseDao {
             }
             throw new RuntimeException("구매 저장 실패", e);
         } finally {
+            try { if (stockUpdateStmt != null) stockUpdateStmt.close(); } catch (Exception ignored) {}
             try { if (priceStmt != null) priceStmt.close(); } catch (Exception ignored) {}
             try { if (detailStmt != null) detailStmt.close(); } catch (Exception ignored) {}
             try { if (purchaseStmt != null) purchaseStmt.close(); } catch (Exception ignored) {}

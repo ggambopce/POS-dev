@@ -1,41 +1,40 @@
 package product;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import stock.StockDao;
+
 import java.util.List;
 import java.util.Scanner;
 
 public class ProductController {
     private final ProductDao productDao = new ProductDao();
+    private final StockDao stockDao = new StockDao();
     private final Scanner sc = new Scanner(System.in);
 
+    /** 제품등록
+     *  새로운 제품을 등록합니다.
+     *  입고등록과 다름
+     */
     public void registerProduct() {
-        try {
-            System.out.print("제품명 입력: ");
-            String productName = sc.nextLine();
+        System.out.print("제품명 입력: ");
+        String productName = sc.nextLine();
 
-            System.out.print("제조사 입력: ");
-            String manufacturer = sc.nextLine();
+        System.out.print("제조사 입력: ");
+        String manufacturer = sc.nextLine();
 
-            System.out.print("성인 전용 여부 입력 (Y/N): ");
-            char adultOnly = sc.nextLine().toUpperCase().charAt(0);
-            if (adultOnly != 'Y' && adultOnly != 'N') {
-                System.out.println("Y 또는 N으로 입력해야 합니다.");
-                return;
-            }
-
-            System.out.print("가격 입력: ");
-            int price = sc.nextInt();
-
-            Date receivedDate = new Date();
-
-            Product product = new Product(0, productName, manufacturer,adultOnly, price);
-            productDao.saveProduct(product);
-
-        } catch (ParseException e) {
-            System.out.println("날짜 형식 오류: yyyy-MM-dd 형식으로 입력하세요.");
+        System.out.print("성인 전용 여부 입력 (Y/N): ");
+        char adultOnly = sc.nextLine().toUpperCase().charAt(0);
+        if (adultOnly != 'Y' && adultOnly != 'N') {
+            System.out.println("Y 또는 N으로 입력해야 합니다.");
+            return;
         }
+
+        System.out.print("가격 입력: ");
+        int price = sc.nextInt();
+
+
+        Product product = new Product(0, productName, manufacturer,adultOnly, price, 0);
+        productDao.saveProduct(product);
+
     }
 
     public void showAllProducts() {
@@ -51,22 +50,23 @@ public class ProductController {
 
 
     private void printProduct(Product p) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         System.out.printf("""
         -------------------------------
         제품ID: %d
         제품명: %s
         제조사: %s
-        유통기한: %s
         성인전용: %s
         가격: %,d원
-        입고일자: %s
         재고: %d개
         -------------------------------
         """,
-                p.getProductId(), p.getProductName(), p.getManufacturer(),
-                sdf.format(p.getExpiryDate()), p.getAdultOnly() == 'Y' ? "19세 이상" : "모두 가능",
-                p.getPrice(), sdf.format(p.getReceivedDate()), p.getStock());
+                p.getProductId(),
+                p.getProductName(),
+                p.getManufacturer(),
+                p.getAdultOnly() == 'Y' ? "19세 이상" : "모두 가능",
+                p.getPrice(),
+                p.getStock());
     }
 
     public void searchByProductName() {

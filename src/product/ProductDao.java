@@ -106,21 +106,16 @@ public class ProductDao {
                 p.manufacturer,
                 p.adult_only,
                 p.price,
-                NVL(SUM(CASE
-                    WHEN s.expiry_date >= SYSDATE THEN s.quantity
-                    ELSE 0
-                END), 0) AS stock
+                p.stock
             FROM PRODUCT p
-            LEFT JOIN STOCK s ON p.product_id = s.product_id
-            WHERE p.product_name = ?
-            GROUP BY p.product_id, p.product_name, p.manufacturer, p.adult_only, p.price
+            WHERE p.product_name LIKE ?
         """;
 
         try (
                 Connection connection = DBConnection.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)
         ) {
-            preparedStatement.setString(1, productName);
+            preparedStatement.setString(1, "%" + productName + "%");
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     product = new Product(
@@ -140,7 +135,6 @@ public class ProductDao {
         return product;
     }
 
-
     // ID로 제품 조회
     public Product findById(int productId) {
         Product product = null;
@@ -151,14 +145,9 @@ public class ProductDao {
                 p.manufacturer,
                 p.adult_only,
                 p.price,
-                NVL(SUM(CASE
-                    WHEN s.expiry_date >= SYSDATE THEN s.quantity
-                    ELSE 0
-                END), 0) AS stock
+                p.stock
             FROM PRODUCT p
-            LEFT JOIN STOCK s ON p.product_id = s.product_id
             WHERE p.product_id = ?
-            GROUP BY p.product_id, p.product_name, p.manufacturer, p.adult_only, p.price
         """;
 
         try (

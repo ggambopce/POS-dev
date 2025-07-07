@@ -114,4 +114,5 @@ public class PurchaseController {
         System.out.println("구매가 완료되었습니다.");
         System.out.printf("현재 포스 잔고: %,d원%n", posBalance);
     }
+
 }

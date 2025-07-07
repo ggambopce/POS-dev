@@ -7,15 +7,16 @@ public class Stock {
     private int productId;
     private Date receivedDate;
     private Date expiryDate;
-    private int quantity;        // 입고된 전체 수량 (아직 팔리거나 폐기되지 않음)
+    private int quantity;        // 입고된 수량(구매시 유통기한지나지 않은 물건 차감)
 
-    public Stock(int stockId, int productId, Date receivedDate, Date expiryDate, int quantity) {
+    public Stock(int stockId, int productId, int quantity, Date expiryDate, Date receivedDate) {
         this.stockId = stockId;
         this.productId = productId;
-        this.receivedDate = receivedDate;
-        this.expiryDate = expiryDate;
         this.quantity = quantity;
+        this.expiryDate = expiryDate;
+        this.receivedDate = receivedDate;
     }
+
 
     public int getStockId() {
         return stockId;
