@@ -1,6 +1,6 @@
 package global.io;
 
-public class CLIOutputProvider implements OutputProvider{
+public class CLIOutputRenderer implements OutputRenderer {
     @Override
     public void print(String message) {
         System.out.print(message);

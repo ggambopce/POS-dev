@@ -12,6 +12,7 @@ public class StaffUI implements View {
     private boolean loggedIn = false;
     private boolean finishRequested = false;
 
+
     public void start() {
         System.out.println("""
             ==============================

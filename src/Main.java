@@ -1,3 +1,8 @@
+import controller.Controller;
+import global.io.CLIInputProvider;
+import global.io.CLIOutputRenderer;
+import global.io.InputProvider;
+import global.io.OutputRenderer;
 import product.view.ProductUI;
 import staff.view.StaffUI;
 
@@ -5,7 +10,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        // I/O 시스템 추상화
+        InputProvider input = new CLIInputProvider();
+        OutputRenderer output = new CLIOutputRenderer();
+
         StaffUI staffUI = new StaffUI();
         ProductUI productUI = new ProductUI();
         staffUI.start();

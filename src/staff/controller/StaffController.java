@@ -1,5 +1,6 @@
 package staff.controller;
 
+import controller.Controller;
 import information.repository.InformationDao;
 import staff.repository.StaffDaoImplement;
 import staff.entity.Staff;
@@ -7,7 +8,7 @@ import staff.entity.Staff;
 import java.util.Date;
 import java.util.Scanner;
 
-public class StaffController {
+public class StaffController implements Controller {
     private final StaffDaoImplement staffDaoImplement = new StaffDaoImplement();
     private final InformationDao infoDao = new InformationDao();
     private final Scanner sc = new Scanner(System.in);
@@ -50,4 +51,8 @@ public class StaffController {
         return loggedInStaff != null;
     }
 
+    @Override
+    public void run() {
+
+    }
 }
