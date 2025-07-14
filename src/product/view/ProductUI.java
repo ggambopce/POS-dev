@@ -80,7 +80,7 @@ public class ProductUI implements View {
         output.println("-------------------------------------");
     }
 
-    public void promptOrderList(List<Product> productList)
+    public void showProductList(List<Product> productList)
     {
         if (productList.isEmpty()) return;
         output.println("제품 목록");

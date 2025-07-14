@@ -42,6 +42,7 @@ public class ProductRegisterController implements Controller {
                 case "3" :
                     view.promptProductList();
                     List<Product> products = productService.findAllProducts();
+                    view.showProductList(products);
                     break;
                 case "4" :
                     break;
