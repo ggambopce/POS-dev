@@ -2,6 +2,7 @@ package product.controller;
 
 import global.io.InputProvider;
 import global.io.OutputRenderer;
+import global.util.MessageBox;
 import main.controller.Controller;
 import product.entity.Product;
 import product.service.ProductService;
@@ -33,7 +34,6 @@ public class ProductRegisterController implements Controller {
             String choice = input.readLine();
             switch (choice) {
                 case "1" :
-
                     break;
                 case "2" :
                     break;
@@ -60,8 +60,11 @@ public class ProductRegisterController implements Controller {
                     productService.registerProduct(product);
                     break;
                 case "0" :
-                    break;
+                    view.showProductClose();
+
+                    return;
                 default:
+                    MessageBox.showWarningByWrongInput(input, output);
             }
         }
     }

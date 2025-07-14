@@ -52,12 +52,17 @@ public class ProductUI implements View {
         output.println("제조사 입력: ");
     }
     public void promptInputGender() {
-        output.println("성인 전용 여부 이벽 (Y/N)");
+        output.println("성인 전용 여부 입력 (Y/N)");
+        output.println("입력: ");
     }
 
     public void promptInputPrice() {
         output.println("가격을 입력하세요.");
         output.println("가격 입력: ");
+    }
+
+    public void showProductClose() {
+        output.println("프로그램을 종료합니다.");
     }
 
     @Override
