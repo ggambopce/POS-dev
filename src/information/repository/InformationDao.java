@@ -1,6 +1,6 @@
-package information;
+package information.repository;
 
-import db.DBConnection;
+import global.db.DBConnection;
 
 import java.sql.*;
 import java.util.Date;

@@ -1,4 +1,6 @@
-package stock;
+package stock.controller;
+
+import stock.repository.StockDao;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

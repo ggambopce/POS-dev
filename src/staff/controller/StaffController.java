@@ -1,12 +1,14 @@
-package staff;
+package staff.controller;
 
-import information.InformationDao;
+import information.repository.InformationDao;
+import staff.repository.StaffDaoImplement;
+import staff.entity.Staff;
 
 import java.util.Date;
 import java.util.Scanner;
 
 public class StaffController {
-    private final StaffDao staffDao = new StaffDao();
+    private final StaffDaoImplement staffDaoImplement = new StaffDaoImplement();
     private final InformationDao infoDao = new InformationDao();
     private final Scanner sc = new Scanner(System.in);
 
@@ -21,7 +23,7 @@ public class StaffController {
         int password = sc.nextInt();
         sc.nextLine(); // 개행 제거
 
-        loggedInStaff = staffDao.login(id, password);
+        loggedInStaff = staffDaoImplement.login(id, password);
 
         if (loggedInStaff == null) {
             System.out.println("로그인 실패. 아이디 또는 비밀번호를 확인하세요.");

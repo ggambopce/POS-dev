@@ -1,13 +1,15 @@
-package staff;
+package staff.repository;
 
-import db.DBConnection;
+import global.db.DBConnection;
+import staff.entity.Staff;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class StaffDao {
+public class StaffDaoImplement {
+
 
     public Staff login(int userId, int password) {
         Staff staff = null;

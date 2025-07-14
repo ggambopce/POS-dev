@@ -1,4 +1,4 @@
-package purchase;
+package purchaseDetail.entity;
 
 public class PurchaseDetail {
     int purchaseDetailId;       // 구매상세 id

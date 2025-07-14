@@ -1,4 +1,4 @@
-package staff;
+package staff.entity;
 
 public class Staff {
     int userId;

@@ -1,6 +1,7 @@
-package product;
+package product.repository;
 
-import db.DBConnection;
+import global.db.DBConnection;
+import product.entity.Product;
 
 import java.sql.*;
 import java.util.ArrayList;

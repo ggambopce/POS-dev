@@ -1,8 +1,11 @@
-package staff;
+package staff.view;
+
+import staff.controller.StaffController;
+import view.View;
 
 import java.util.Scanner;
 
-public class StaffUI {
+public class StaffUI implements View {
     private final StaffController staffController = new StaffController();
     private final Scanner sc = new Scanner(System.in);
 
@@ -47,5 +50,20 @@ public class StaffUI {
 
     public boolean isFinishRequested() {
         return finishRequested;
+    }
+
+    @Override
+    public void displayHeader() {
+
+    }
+
+    @Override
+    public void displayBody() {
+
+    }
+
+    @Override
+    public void displayFooter() {
+
     }
 }

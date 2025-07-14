@@ -1,6 +1,4 @@
-package product;
-
-import java.util.Date;
+package product.entity;
 
 public class Product {
     int productId;

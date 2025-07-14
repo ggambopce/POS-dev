@@ -1,7 +1,8 @@
-package product;
+package product.view;
 
-import purchase.PurchaseController;
-import stock.StockController;
+import product.controller.ProductController;
+import purchase.controller.PurchaseController;
+import stock.controller.StockController;
 
 import java.util.Scanner;
 

@@ -1,8 +1,5 @@
-import information.InformationDao;
-import product.ProductUI;
-import staff.StaffController;
-import staff.StaffService;
-import staff.StaffUI;
+import product.view.ProductUI;
+import staff.view.StaffUI;
 
 import java.util.Scanner;
 
@@ -10,7 +7,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         StaffUI staffUI = new StaffUI();
-        StaffController staffController = new StaffController();
         ProductUI productUI = new ProductUI();
         staffUI.start();
 
@@ -23,7 +19,7 @@ public class Main {
                 1. 상품 관리
                 2. 퇴근
                 ========================
-                선택 > 
+                선택 >
                 """);
 
                 String choice = new java.util.Scanner(System.in).nextLine();

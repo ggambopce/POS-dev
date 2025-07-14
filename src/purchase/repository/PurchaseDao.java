@@ -1,6 +1,8 @@
-package purchase;
+package purchase.repository;
 
-import db.DBConnection;
+import global.db.DBConnection;
+import purchaseDetail.entity.PurchaseDetail;
+import purchase.entity.Purchase;
 
 import java.sql.*;
 import java.util.List;

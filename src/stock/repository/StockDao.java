@@ -1,6 +1,7 @@
-package stock;
+package stock.repository;
 
-import db.DBConnection;
+import global.db.DBConnection;
+import stock.entity.Stock;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

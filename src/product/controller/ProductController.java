@@ -1,6 +1,8 @@
-package product;
+package product.controller;
 
-import stock.StockDao;
+import product.repository.ProductDao;
+import product.entity.Product;
+import stock.repository.StockDao;
 
 import java.util.List;
 import java.util.Scanner;

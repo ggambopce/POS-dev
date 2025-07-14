@@ -1,9 +1,12 @@
-package purchase;
+package purchase.controller;
 
-import product.Product;
-import product.ProductDao;
-import stock.Stock;
-import stock.StockDao;
+import product.entity.Product;
+import product.repository.ProductDao;
+import purchase.entity.Purchase;
+import purchase.repository.PurchaseDao;
+import purchaseDetail.entity.PurchaseDetail;
+import stock.entity.Stock;
+import stock.repository.StockDao;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package purchase;
+package purchase.entity;
 
 import java.util.Date;
 
