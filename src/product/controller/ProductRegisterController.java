@@ -9,6 +9,8 @@ import product.service.ProductService;
 import product.service.ProductServiceImplement;
 import product.view.ProductUI;
 
+import java.util.List;
+
 public class ProductRegisterController implements Controller {
 
     private final InputProvider input;
@@ -38,6 +40,8 @@ public class ProductRegisterController implements Controller {
                 case "2" :
                     break;
                 case "3" :
+                    view.promptProductList();
+                    List<Product> products = productService.findAllProducts();
                     break;
                 case "4" :
                     break;

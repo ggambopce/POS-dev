@@ -4,9 +4,11 @@ import global.io.InputProvider;
 import global.io.OutputRenderer;
 import main.view.View;
 import product.controller.ProductController;
+import product.entity.Product;
 import purchase.controller.PurchaseController;
 import stock.controller.StockController;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ProductUI implements View {
@@ -33,7 +35,6 @@ public class ProductUI implements View {
         output.println("4. 제품명으로 검색");
         output.println("5. 신제품 등록");
         output.println("0. 종료");
-
     }
 
     @Override
@@ -67,7 +68,27 @@ public class ProductUI implements View {
 
     @Override
     public void displayFooter() {
+        output.println("-------------------------------------");
+        output.println("          [열정 열정 열정 !!]          ");
+        output.println("=====================================");
+    }
 
+    public void promptProductList()
+    {
+        output.println("=====================================");
+        output.println("         [ 사원 POS 상품 조회]         ");
+        output.println("-------------------------------------");
+    }
+
+    public void promptOrderList(List<Product> productList)
+    {
+        if (productList.isEmpty()) return;
+        output.println("제품 목록");
+        for (int i = 0; i < productList.size(); i++)
+        {
+            // 제품 목록 리스트
+        }
+        output.println("---------------------------");
     }
 
 
