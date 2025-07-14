@@ -1,5 +1,8 @@
 package product.controller;
 
+import global.io.InputProvider;
+import global.io.OutputRenderer;
+import main.controller.Controller;
 import product.repository.ProductDao;
 import product.entity.Product;
 import stock.repository.StockDao;
@@ -7,10 +10,14 @@ import stock.repository.StockDao;
 import java.util.List;
 import java.util.Scanner;
 
-public class ProductController {
+public class ProductController implements Controller {
     private final ProductDao productDao = new ProductDao();
     private final StockDao stockDao = new StockDao();
     private final Scanner sc = new Scanner(System.in);
+
+    public ProductController(InputProvider input, OutputRenderer output) {
+
+    }
 
     /** 제품등록
      *  새로운 제품을 등록합니다.
@@ -97,5 +104,10 @@ public class ProductController {
         } else {
             printProduct(result);
         }
+    }
+
+    @Override
+    public void run() {
+
     }
 }

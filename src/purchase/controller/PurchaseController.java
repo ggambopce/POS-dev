@@ -1,5 +1,7 @@
 package purchase.controller;
 
+import global.io.InputProvider;
+import global.io.OutputRenderer;
 import product.entity.Product;
 import product.repository.ProductDao;
 import purchase.entity.Purchase;

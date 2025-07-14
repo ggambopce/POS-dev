@@ -7,12 +7,6 @@ public class Staff {
 
     public Staff(){};
 
-    public Staff(int userId, int password, String userName) {
-        this.userId = userId;
-        this.password = password;
-        this.userName = userName;
-    }
-
 
     public String getUserName() {
         return userName;
