@@ -17,6 +17,14 @@ public class Product {
         this.stock = stock;
     }
 
+    // 신제품 등록
+    public Product(String name, String manufacturer, char gender, int price) {
+        this.productName = name;
+        this.manufacturer = manufacturer;
+        this.adultOnly = gender;
+        this.price = price;
+    }
+
 
     public int getProductId() {
         return productId;
