@@ -1,4 +1,4 @@
-package view;
+package main.view;
 
 import global.io.OutputRenderer;
 
@@ -17,10 +17,21 @@ public class MainMenuView implements View{
     }
 
     @Override
-    public void displayBody() {
+    public void displayMenu() {
         output.println("1. 로그인 및 근무 시작");
         output.println("0. 프로그램 종료");
     }
+
+
+    @Override
+    public void displayLast() {
+        output.println("번호를 입력하세요>");
+    }
+
+    public void displayClose() {
+        output.println("프로그램을 종료합니다.");
+    }
+
 
     @Override
     public void displayFooter() {

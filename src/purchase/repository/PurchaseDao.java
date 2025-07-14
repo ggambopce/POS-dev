@@ -40,7 +40,7 @@ public class PurchaseDao {
 
             purchaseStmt = conn.prepareStatement(purchaseSql);
             purchaseStmt.setTimestamp(1, new Timestamp(purchase.getPurchaseTime().getTime()));
-            purchaseStmt.setInt(2, purchase.totalAmount);
+            purchaseStmt.setInt(2, purchase.getTotalAmount());
             purchaseStmt.executeUpdate();
 
             // 2. 생성된 purchase_id 얻기 (Oracle 방식)

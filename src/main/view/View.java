@@ -1,8 +1,9 @@
-package view;
+package main.view;
 
 public interface View {
 
     void displayHeader();
-    void displayBody();
+    void displayMenu();
+    void displayLast();
     void displayFooter();
 }
