@@ -1,12 +1,17 @@
 package stock.controller;
 
+import main.controller.Controller;
 import stock.repository.StockDao;
+import stock.service.StockService;
+import stock.service.StockServiceImplement;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class StockController {
+public class StockController implements Controller {
+
+    private final StockService stockService = new StockServiceImplement();
 
     private final StockDao stockDao = new StockDao();
     private final Scanner sc = new Scanner(System.in);
@@ -30,5 +35,10 @@ public class StockController {
         } catch (Exception e) {
             System.out.println("입고 등록 중 오류: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void run() {
+        stockService.updateStock();
     }
 }

@@ -92,20 +92,6 @@ public class ProductController implements Controller {
                 p.getStock());
     }
 
-
-    public void searchByProductName() {
-        System.out.print("검색할 제품이름: ");
-        String keyword = sc.nextLine();
-
-        Product result = productDao.findByName(keyword);
-
-        if (result == null) {
-            System.out.println("해당 물건 없음");
-        } else {
-            printProduct(result);
-        }
-    }
-
     @Override
     public void run() {
 

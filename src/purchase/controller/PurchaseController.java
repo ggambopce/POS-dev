@@ -2,6 +2,7 @@ package purchase.controller;
 
 import global.io.InputProvider;
 import global.io.OutputRenderer;
+import main.controller.Controller;
 import product.entity.Product;
 import product.repository.ProductDao;
 import purchase.entity.Purchase;
@@ -15,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class PurchaseController {
+public class PurchaseController implements Controller {
     private final ProductDao productDao = new ProductDao();
     private final PurchaseDao purchaseDao = new PurchaseDao();
     private final StockDao stockDao = new StockDao();
@@ -117,4 +118,8 @@ public class PurchaseController {
         System.out.printf("현재 포스 잔고: %,d원%n", posBalance);
     }
 
+    @Override
+    public void run() {
+
+    }
 }

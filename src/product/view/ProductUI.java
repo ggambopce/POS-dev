@@ -19,7 +19,7 @@ public class ProductUI implements View {
         this.input = input;
         this.output = output;
     }
-
+//----------------------------제품 메뉴 컴포넌트 랜더링----------------------------//
     @Override
     public void displayHeader() {
         output.println("=====================================");
@@ -42,8 +42,89 @@ public class ProductUI implements View {
         output.println("=====================================");
         output.print("메뉴를 선택하세요 > ");
     }
+//----------------------------2.입고 등록 컴포넌트 랜더링----------------------------//
 
-    // 신제품 등록
+
+//----------------------------3.전체 제품 목록 보기 컴포넌트 랜더링----------------------------//
+
+    public void promptProductList()
+    {
+        output.println("=====================================");
+        output.println("         [ 사원 POS 상품 조회]         ");
+        output.println("-------------------------------------");
+    }
+
+    public void showProductList(List<Product> productList)
+    {
+        if (productList.isEmpty()) return;
+        output.println("제품 목록");
+        for (int i = 0; i < productList.size(); i++)
+        {
+            // 제품 목록 리스트
+        }
+        output.println("---------------------------");
+    }
+
+    public void showAllProducts() {
+//        List<Product> products = productDao.findAllProducts();
+//        if (products.isEmpty()) {
+//            System.out.println("등록된 제품이 없습니다.");
+//            return;
+//        }
+//        System.out.println("==============================================================================");
+//        System.out.printf("%-4s | %-10s | %-10s | %-8s | %-8s | %-5s%n",
+//                "ID", "제품명", "제조사", "성인전용", "가격", "재고");
+//        System.out.println("------------------------------------------------------------------------------");
+//
+//        for (Product p : products) {
+//            System.out.printf("%-4d | %-10s | %-10s | %-8s | %,8d원 | %3d개%n",
+//                    p.getProductId(),
+//                    p.getProductName(),
+//                    p.getManufacturer(),
+//                    p.getAdultOnly() == 'Y' ? "19세 이상" : "모두 가능",
+//                    p.getPrice(),
+//                    p.getStock());
+        }
+
+
+
+//----------------------------4. 제품명으로 검색 컴포넌트 랜더링----------------------------//
+    public void searchByProductName() {
+
+//        System.out.print("검색할 제품이름: ");
+//        String keyword = sc.nextLine();
+//
+//        Product result = productDao.findByName(keyword);
+//
+//        if (result == null) {
+//            System.out.println("해당 물건 없음");
+//        } else {
+//            printProduct(result);
+//        }
+    }
+
+    private void printProduct(Product p) {
+        String stars = "*".repeat(p.getStock());
+        System.out.printf("""
+        -------------------------------
+        제품ID: %d
+        제품명: %s
+        제조사: %s
+        성인전용: %s
+        가격: %,d원
+        재고: %s (%d개)
+        -------------------------------
+        """,
+                p.getProductId(),
+                p.getProductName(),
+                p.getManufacturer(),
+                p.getAdultOnly() == 'Y' ? "19세 이상" : "모두 가능",
+                p.getPrice(),
+                stars,
+                p.getStock());
+    }
+
+//----------------------------5. 신제품 등록 컴포넌트 랜더링----------------------------//
     public void promptInputProductName() {
         output.println("상품 이름을 입력하세요.");
         output.print("상품명 입력:  ");
@@ -65,7 +146,7 @@ public class ProductUI implements View {
     public void showProductClose() {
         output.println("프로그램을 종료합니다.");
     }
-
+    //----------------------------푸터----------------------------//
     @Override
     public void displayFooter() {
         output.println("-------------------------------------");
@@ -73,23 +154,6 @@ public class ProductUI implements View {
         output.println("=====================================");
     }
 
-    public void promptProductList()
-    {
-        output.println("=====================================");
-        output.println("         [ 사원 POS 상품 조회]         ");
-        output.println("-------------------------------------");
-    }
-
-    public void showProductList(List<Product> productList)
-    {
-        if (productList.isEmpty()) return;
-        output.println("제품 목록");
-        for (int i = 0; i < productList.size(); i++)
-        {
-            // 제품 목록 리스트
-        }
-        output.println("---------------------------");
-    }
 
 
 

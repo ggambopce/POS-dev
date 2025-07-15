@@ -8,4 +8,6 @@ public interface ProductService {
     void registerProduct(Product product);
 
     List<Product> findAllProducts();
+
+    void findByProductName();
 }
