@@ -1,15 +1,10 @@
-package product.view;
+package main.view;
 
 import global.io.InputProvider;
 import global.io.OutputRenderer;
-import main.view.View;
-import product.controller.ProductController;
 import product.entity.Product;
-import purchase.controller.PurchaseController;
-import stock.controller.StockController;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class ProductUI implements View {
     private final InputProvider input;

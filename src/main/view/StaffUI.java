@@ -1,11 +1,7 @@
-package staff.view;
+package main.view;
 
-import global.io.InputProvider;
 import global.io.OutputRenderer;
-import main.view.View;
 import staff.entity.Staff;
-
-import java.util.Scanner;
 
 public class StaffUI implements View {
 
@@ -42,7 +38,6 @@ public class StaffUI implements View {
 
     @Override
     public void displayMenu() {
-
     }
 
     @Override

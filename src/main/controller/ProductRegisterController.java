@@ -1,13 +1,12 @@
-package product.controller;
+package main.controller;
 
 import global.io.InputProvider;
 import global.io.OutputRenderer;
 import global.util.MessageBox;
-import main.controller.Controller;
 import product.entity.Product;
 import product.service.ProductService;
 import product.service.ProductServiceImplement;
-import product.view.ProductUI;
+import main.view.ProductUI;
 import purchase.controller.PurchaseController;
 import stock.controller.StockController;
 
@@ -27,19 +26,20 @@ public class ProductRegisterController implements Controller {
 
     @Override
     public void run() {
+        ProductService productService = new ProductServiceImplement();
+        Controller purchaseController = new PurchaseController();
         while (true) {
             view.displayHeader();
             view.displayMenu();
             view.displayLast();
 
-            ProductService productService = new ProductServiceImplement();
+
             Controller controller = null;
 
             String choice = input.readLine();
             switch (choice) {
                 // 구매
                 case "1" :
-                    Controller purchaseController = new PurchaseController();
                     purchaseController.run();
                     break;
                 // 입고등록

@@ -3,22 +3,21 @@ package main.controller;
 import global.io.InputProvider;
 import global.io.OutputRenderer;
 import global.util.MessageBox;
-import main.view.MainMenuView;
-import staff.controller.StaffController;
+import main.view.StaffLoginUI;
 
-public class MainMenuController implements Controller{
+public class StaffLoginController implements Controller{
 
     private final OutputRenderer output;
     private final InputProvider input;
 
-    public MainMenuController(InputProvider input, OutputRenderer output) {
+    public StaffLoginController(InputProvider input, OutputRenderer output) {
         this.output = output;
         this.input = input;
     }
 
     @Override
     public void run() {
-        MainMenuView view = new MainMenuView(output);
+        StaffLoginUI view = new StaffLoginUI(output);
 
         while (true) {
             view.displayHeader();
@@ -51,7 +50,6 @@ public class MainMenuController implements Controller{
             }
 
             view.displayFooter();
-
 
         }
     }

@@ -2,10 +2,10 @@ package main.view;
 
 import global.io.OutputRenderer;
 
-public class MainMenuView implements View{
+public class StaffLoginUI implements View{
     private final OutputRenderer output;
 
-    public MainMenuView(OutputRenderer output) {
+    public StaffLoginUI(OutputRenderer output) {
         this.output = output;
     }
 

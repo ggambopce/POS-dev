@@ -1,8 +1,7 @@
-package product.controller;
+package main.controller;
 
 import global.io.InputProvider;
 import global.io.OutputRenderer;
-import main.controller.Controller;
 import product.repository.ProductDao;
 import product.entity.Product;
 import stock.repository.StockDao;
