@@ -7,11 +7,9 @@ import product.entity.Product;
 import java.util.List;
 
 public class ProductUI implements View {
-    private final InputProvider input;
     private final OutputRenderer output;
 
-    public ProductUI(InputProvider input, OutputRenderer output) {
-        this.input = input;
+    public ProductUI(OutputRenderer output) {
         this.output = output;
     }
 //----------------------------제품 메뉴 컴포넌트 랜더링----------------------------//

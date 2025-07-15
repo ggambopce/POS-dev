@@ -1,5 +1,6 @@
 package main.view;
 
+import global.io.InputProvider;
 import global.io.OutputRenderer;
 import staff.entity.Staff;
 
@@ -9,6 +10,7 @@ public class StaffUI implements View {
     private boolean isLogin;
 
     public StaffUI(OutputRenderer output) {
+
         this.output = output;
         isLogin = false;
     }
@@ -75,5 +77,6 @@ public class StaffUI implements View {
     }
 
 
-
+    public void displayClose() {
+    }
 }
