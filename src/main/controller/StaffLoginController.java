@@ -7,15 +7,14 @@ import staff.service.StaffService;
 import staff.service.StaffServiceImplement;
 import main.view.StaffUI;
 
-public class StaffController implements Controller {
+public class StaffLoginController implements Controller {
     private final InputProvider input;
     private final OutputRenderer output;
     private final StaffUI view;
-
     StaffService staffService;
 
 
-    public StaffController(InputProvider input, OutputRenderer output) {
+    public StaffLoginController(InputProvider input, OutputRenderer output) {
         this.input = input;
         this.output = output;
         this.view = new StaffUI(output);

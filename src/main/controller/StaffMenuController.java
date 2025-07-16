@@ -3,22 +3,20 @@ package main.controller;
 import global.io.InputProvider;
 import global.io.OutputRenderer;
 import global.util.MessageBox;
-import main.view.StaffLoginUI;
 import main.view.StaffUI;
-import staff.service.StaffService;
 
 public class StaffMenuController implements Controller{
 
     private final OutputRenderer output;
     private final InputProvider input;
     private final StaffUI view;
-    private final StaffService staffService;
+    private final StaffLoginController staffLoginController;
 
-    public StaffMenuController(InputProvider input, OutputRenderer output, StaffUI staffUI, StaffService staffService) {
+    public StaffMenuController(InputProvider input, OutputRenderer output, StaffUI staffUI) {
         this.output = output;
         this.input = input;
         this.view = staffUI;
-        this.staffService = staffService;
+        this.staffLoginController = null;
     }
 
     @Override
@@ -41,7 +39,7 @@ public class StaffMenuController implements Controller{
                     int userId = Integer.parseInt(input.readLine());
                     view.promptStaffPassword();
                     int password = Integer.parseInt(input.readLine());
-                    staffService.login(userId, password);
+                    staffLoginController.run();
                     break;
 
                 // 프로그램 종료

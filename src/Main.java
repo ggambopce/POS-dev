@@ -16,6 +16,7 @@ public class Main {
         OutputRenderer output = new CLIOutputRenderer();
         StaffUI staffUI = new StaffUI(output);
 
+
         // 컨트롤러 초기화
         Controller controller = new StaffMenuController(input, output, staffUI);
         controller.run();
