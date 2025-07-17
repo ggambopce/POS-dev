@@ -1,23 +1,23 @@
-package main.controller;
+package staff.controller;
 
 import global.io.InputProvider;
 import global.io.OutputRenderer;
 import global.util.MessageBox;
-import main.view.StaffLoginUI;
-import main.view.StaffMenuUI;
+import main.controller.Controller;
+import staff.view.StaffUI;
 
-public class StaffMenuController implements Controller{
+public class StaffMenuController implements Controller {
 
     private final OutputRenderer output;
     private final InputProvider input;
-    private final StaffMenuUI view;
+    private final StaffUI view;
     private final StaffLoginController staffLoginController;
 
-    public StaffMenuController(InputProvider input, OutputRenderer output, StaffMenuUI staffMenuUI) {
+    public StaffMenuController(InputProvider input, OutputRenderer output) {
         this.output = output;
         this.input = input;
-        this.view = staffMenuUI;
-        this.staffLoginController = null;
+        this.view = new StaffUI(output);
+        this.staffLoginController = new StaffLoginController(input,output);
     }
 
     @Override

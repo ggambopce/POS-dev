@@ -30,4 +30,42 @@ public class StaffServiceImplement implements StaffService {
     public boolean checkStaffId(int staffId) {
         return false;
     }
+
+    @Override
+    public void finishWork() {
+
+    }
 }
+
+
+//    public boolean isLogin() {
+//        return loggedIn;
+//    }
+//
+//    public void finish() {
+//        if (loggedIn) {
+//            staffController.finishWork();
+//            loggedIn = false;
+//            finishRequested = true;
+//        }
+//    }
+//
+//    public boolean isFinishRequested() {
+//        return finishRequested;
+//    }
+
+//    // 2. 퇴근 처리 메서드
+//    public void finishWork() {
+//        if (loggedInStaff == null) {
+//            System.out.println("현재 로그인한 사원이 없습니다.");
+//            return;
+//        }
+//
+//        infoDao.finishWork(loggedInStaff.getUserId());
+//        loggedInStaff = null; // 세션 초기화
+//    }
+//
+//    // 로그인 상태 확인
+//    public boolean isLoggedIn() {
+//        return loggedInStaff != null;
+//    }
