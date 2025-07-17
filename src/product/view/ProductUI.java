@@ -40,7 +40,7 @@ public class ProductUI implements View {
 
 //----------------------------3.전체 제품 목록 보기 컴포넌트 랜더링----------------------------//
 
-    public void promptProductList()
+    public void showProductList()
     {
         output.println("=====================================");
         output.println("         [ 사원 POS 상품 조회]         ");
@@ -78,8 +78,6 @@ public class ProductUI implements View {
 //                    p.getPrice(),
 //                    p.getStock());
         }
-
-
 
 //----------------------------4. 제품명으로 검색 컴포넌트 랜더링----------------------------//
     public void searchByProductName() {

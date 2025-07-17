@@ -48,7 +48,7 @@ public class ProductMenuController implements Controller {
                     break;
                 // 전체 제품 목록 보기
                 case "3" :
-                    view.promptProductList();
+                    view.showProductList();
                     List<Product> products = productService.findAllProducts();
                     view.showProductList(products);
                     break;

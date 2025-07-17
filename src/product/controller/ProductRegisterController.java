@@ -59,27 +59,7 @@ public class ProductRegisterController implements Controller {
 
 
     public void showAllProducts() {
-        List<Product> products = productDao.findAllProducts();
-        if (products.isEmpty()) {
-            System.out.println("등록된 제품이 없습니다.");
-            return;
-        }
-        System.out.println("==============================================================================");
-        System.out.printf("%-4s | %-10s | %-10s | %-8s | %-8s | %-5s%n",
-                "ID", "제품명", "제조사", "성인전용", "가격", "재고");
-        System.out.println("------------------------------------------------------------------------------");
 
-        for (Product p : products) {
-            System.out.printf("%-4d | %-10s | %-10s | %-8s | %,8d원 | %3d개%n",
-                    p.getProductId(),
-                    p.getProductName(),
-                    p.getManufacturer(),
-                    p.getAdultOnly() == 'Y' ? "19세 이상" : "모두 가능",
-                    p.getPrice(),
-                    p.getStock());
-        }
-
-        System.out.println("==============================================================================");
     }
 
 
