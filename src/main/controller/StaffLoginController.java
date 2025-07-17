@@ -3,21 +3,22 @@ package main.controller;
 import global.util.MessageBox;
 import global.io.InputProvider;
 import global.io.OutputRenderer;
+import product.controller.ProductMenuController;
 import staff.service.StaffService;
 import staff.service.StaffServiceImplement;
-import main.view.StaffUI;
+import main.view.StaffLoginUI;
 
 public class StaffLoginController implements Controller {
     private final InputProvider input;
     private final OutputRenderer output;
-    private final StaffUI view;
+    private final StaffLoginUI view;
     StaffService staffService;
 
 
     public StaffLoginController(InputProvider input, OutputRenderer output) {
         this.input = input;
         this.output = output;
-        this.view = new StaffUI(output);
+        this.view = new StaffLoginUI(output);
         staffService = new StaffServiceImplement();
     }
 
@@ -40,7 +41,7 @@ public class StaffLoginController implements Controller {
 
             view.showLoginSuccess();
             MessageBox.showEnterToContinue(input, output);
-            Controller controller = new ProductController(input, output);
+            Controller controller = new ProductMenuController(input, output);
             controller.run();
 
         }

@@ -1,7 +1,7 @@
-package main.view;
+package product.view;
 
-import global.io.InputProvider;
 import global.io.OutputRenderer;
+import main.view.View;
 import product.entity.Product;
 
 import java.util.List;
@@ -118,6 +118,13 @@ public class ProductUI implements View {
     }
 
 //----------------------------5. 신제품 등록 컴포넌트 랜더링----------------------------//
+    public void displayProductRegisterHeader()
+    {
+        output.println("=====================================");
+        output.println("            [ 신제품 등록 ]            ");
+        output.println("-------------------------------------");
+    }
+
     public void promptInputProductName() {
         output.println("상품 이름을 입력하세요.");
         output.print("상품명 입력:  ");
@@ -134,6 +141,10 @@ public class ProductUI implements View {
     public void promptInputPrice() {
         output.println("가격을 입력하세요.");
         output.println("가격 입력: ");
+    }
+
+    public void showRegisterSuccess() {
+        output.println("신제품이 제품목록에 등록되었습니다.");
     }
 
     public void showProductClose() {

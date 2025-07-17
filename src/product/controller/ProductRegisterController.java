@@ -1,49 +1,62 @@
-package main.controller;
+package product.controller;
 
 import global.io.InputProvider;
 import global.io.OutputRenderer;
-import product.repository.ProductDao;
+import main.controller.Controller;
 import product.entity.Product;
-import stock.repository.StockDao;
+import product.service.ProductService;
+import product.service.ProductServiceImplement;
+import product.view.ProductUI;
 
 import java.util.List;
-import java.util.Scanner;
 
-public class ProductController implements Controller {
-    private final ProductDao productDao = new ProductDao();
-    private final StockDao stockDao = new StockDao();
-    private final Scanner sc = new Scanner(System.in);
+/** 제품등록
+ *  새로운 제품을 등록합니다.
+ *  입고등록과 다름
+ */
+public class ProductRegisterController implements Controller {
 
-    public ProductController(InputProvider input, OutputRenderer output) {
+    private final InputProvider input;
+    private final OutputRenderer output;
+    private final ProductUI view;
+    ProductService productService;
 
+
+
+    public ProductRegisterController(InputProvider input, OutputRenderer output) {
+
+        this.input = input;
+        this.output = output;
+        this.view = new ProductUI(output);
+        productService = new ProductServiceImplement();
     }
 
-    /** 제품등록
-     *  새로운 제품을 등록합니다.
-     *  입고등록과 다름
-     */
-    public void registerProduct() {
-        System.out.print("제품명 입력: ");
-        String productName = sc.nextLine();
+    @Override
+    public void run() {
+        view.displayProductRegisterHeader();
 
-        System.out.print("제조사 입력: ");
-        String manufacturer = sc.nextLine();
+        view.promptInputProductName();
+        String productName = input.readLine();
 
-        System.out.print("성인 전용 여부 입력 (Y/N): ");
-        char adultOnly = sc.nextLine().toUpperCase().charAt(0);
+        view.promptInputManufacturer();
+        String manufacturer = input.readLine();
+
+        view.promptInputGender();
+        char adultOnly = input.readLine().toUpperCase().charAt(0);
         if (adultOnly != 'Y' && adultOnly != 'N') {
             System.out.println("Y 또는 N으로 입력해야 합니다.");
             return;
         }
 
-        System.out.print("가격 입력: ");
-        int price = sc.nextInt();
-
+        view.promptInputPrice();
+        int price = Integer.parseInt(input.readLine());
 
         Product product = new Product(0, productName, manufacturer,adultOnly, price, 0);
-        productDao.saveProduct(product);
+        productService.registerProduct(product);
 
+        view.showRegisterSuccess();
     }
+
 
     public void showAllProducts() {
         List<Product> products = productDao.findAllProducts();
@@ -91,8 +104,5 @@ public class ProductController implements Controller {
                 p.getStock());
     }
 
-    @Override
-    public void run() {
 
-    }
 }

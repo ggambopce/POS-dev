@@ -1,40 +1,40 @@
-package main.controller;
+package product.controller;
 
 import global.io.InputProvider;
 import global.io.OutputRenderer;
 import global.util.MessageBox;
+import main.controller.Controller;
 import product.entity.Product;
 import product.service.ProductService;
 import product.service.ProductServiceImplement;
-import main.view.ProductUI;
+import product.view.ProductUI;
 import purchase.controller.PurchaseController;
 import stock.controller.StockController;
 
 import java.util.List;
 
-public class ProductRegisterController implements Controller {
+public class ProductMenuController implements Controller {
 
     private final InputProvider input;
     private final OutputRenderer output;
-    private final ProductUI view;
+    private ProductUI view;
 
-    public ProductRegisterController(InputProvider input, OutputRenderer output, ProductUI view) {
+    public ProductMenuController(InputProvider input, OutputRenderer output) {
         this.input = input;
         this.output = output;
-        this.view = view;
+        this.view = null;
     }
 
     @Override
     public void run() {
         ProductService productService = new ProductServiceImplement();
         Controller purchaseController = new PurchaseController();
+        Controller stockController = new StockController();
+        view = new ProductUI(output);
         while (true) {
             view.displayHeader();
             view.displayMenu();
             view.displayLast();
-
-
-            Controller controller = null;
 
             String choice = input.readLine();
             switch (choice) {
@@ -44,7 +44,6 @@ public class ProductRegisterController implements Controller {
                     break;
                 // 입고등록
                 case "2" :
-                    Controller stockController = new StockController();
                     stockController.run();
                     break;
                 // 전체 제품 목록 보기

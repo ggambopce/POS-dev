@@ -3,19 +3,20 @@ package main.controller;
 import global.io.InputProvider;
 import global.io.OutputRenderer;
 import global.util.MessageBox;
-import main.view.StaffUI;
+import main.view.StaffLoginUI;
+import main.view.StaffMenuUI;
 
 public class StaffMenuController implements Controller{
 
     private final OutputRenderer output;
     private final InputProvider input;
-    private final StaffUI view;
+    private final StaffMenuUI view;
     private final StaffLoginController staffLoginController;
 
-    public StaffMenuController(InputProvider input, OutputRenderer output, StaffUI staffUI) {
+    public StaffMenuController(InputProvider input, OutputRenderer output, StaffMenuUI staffMenuUI) {
         this.output = output;
         this.input = input;
-        this.view = staffUI;
+        this.view = staffMenuUI;
         this.staffLoginController = null;
     }
 
@@ -35,10 +36,6 @@ public class StaffMenuController implements Controller{
             switch (choice) {
                 // 로그인 및 근무 시작
                 case "1" :
-                    view.promptStaffId();
-                    int userId = Integer.parseInt(input.readLine());
-                    view.promptStaffPassword();
-                    int password = Integer.parseInt(input.readLine());
                     staffLoginController.run();
                     break;
 
