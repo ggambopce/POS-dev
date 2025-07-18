@@ -5,8 +5,6 @@ import global.io.OutputRenderer;
 import global.util.MessageBox;
 import main.controller.Controller;
 import product.controller.ProductMenuController;
-import product.service.ProductService;
-import product.service.ProductServiceImplement;
 import staff.service.StaffService;
 import staff.service.StaffServiceImplement;
 import staff.view.StaffUI;
@@ -39,7 +37,7 @@ public class StaffProductController implements Controller {
             }
 
             switch (choice) {
-                // 1. 상품관리
+                // 1. 상품 관리
                 case "1" :
                     productMenuController.run();
                     break;

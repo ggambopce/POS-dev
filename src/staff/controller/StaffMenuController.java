@@ -36,6 +36,7 @@ public class StaffMenuController implements Controller {
             switch (choice) {
                 // 로그인 및 근무 시작
                 case "1" :
+
                     staffLoginController.run();
                     break;
 

@@ -66,8 +66,8 @@ public class StaffUI implements View {
         output.println("-------------------------------------");
     }
     public void displayWorkMenu() {
-        output.println("1. 로그인 및 근무 시작");
-        output.println("2. 프로그램 종료");
+        output.println("1. 상품 관리");
+        output.println("2. 퇴근");
     }
 
 
