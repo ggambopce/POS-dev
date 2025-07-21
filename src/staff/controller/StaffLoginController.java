@@ -32,6 +32,7 @@ public class StaffLoginController implements Controller {
                 view.promptStaffPassword();
                 int password = Integer.parseInt(input.readLine());
                 staffService.login(userId, password);
+                view.showLoginSuccess();
             } else {
                 view.showLoginFailById();
                 MessageBox.showEnterToContinue(input, output);

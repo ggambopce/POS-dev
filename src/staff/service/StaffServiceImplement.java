@@ -3,6 +3,8 @@ package staff.service;
 import global.SessionManager.SessionContext;
 import global.SessionManager.SessionManager;
 import information.repository.InformationDao;
+import information.service.InformationService;
+import information.service.InformationServiceImplement;
 import staff.entity.Staff;
 import staff.repository.StaffDaoImplement;
 
@@ -10,12 +12,14 @@ import java.util.Date;
 
 public class StaffServiceImplement implements StaffService {
 
+    private final InformationService informationService = new InformationServiceImplement();
     private final StaffDaoImplement staffDaoImplement = new StaffDaoImplement();
     private final InformationDao informationDao = new InformationDao();
     private final SessionManager sessionManager = SessionContext.getInstance();
 
-    public void login(int userId, int password) {
+    public Staff login(int userId, int password) {
 
+        // DB 에서 해당 사용자 조회(id,pw 확인)
         Staff staff = staffDaoImplement.login(userId, password);
 
         if (staff != null) {
@@ -25,9 +29,13 @@ public class StaffServiceImplement implements StaffService {
             Date now = new Date();
             informationDao.saveLoginInfo(staff.getUserId(), now);
             System.out.println("로그인 시간이 기록되었습니다: " + now);
+
+            return staff;
         } else {
             System.out.println("아이디 또는 비밀번호가 잘못되었습니다.");
+
         }
+        return null;
     }
 
     @Override
@@ -43,8 +51,9 @@ public class StaffServiceImplement implements StaffService {
         }
 
         Staff staff = sessionManager.getCurrentUser();
+
+        informationService.finishWorkRecord(staff.getUserId());
         informationDao.finishWork(staff.getUserId());
         sessionManager.logout();
-
     }
 }
