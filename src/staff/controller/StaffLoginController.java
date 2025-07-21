@@ -26,7 +26,6 @@ public class StaffLoginController implements Controller {
     public void run() {
         while (true) {
             view.displayHeader();
-
             view.promptStaffId();
             int userId = Integer.parseInt(input.readLine());
             if (staffService.checkStaffId(userId)){ // 올바른 아이디인 경우

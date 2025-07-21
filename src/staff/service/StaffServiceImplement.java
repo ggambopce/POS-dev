@@ -1,5 +1,7 @@
 package staff.service;
 
+import global.SessionManager.SessionContext;
+import global.SessionManager.SessionManager;
 import information.repository.InformationDao;
 import staff.entity.Staff;
 import staff.repository.StaffDaoImplement;
@@ -8,14 +10,16 @@ import java.util.Date;
 
 public class StaffServiceImplement implements StaffService {
 
-
     private final StaffDaoImplement staffDaoImplement = new StaffDaoImplement();
     private final InformationDao informationDao = new InformationDao();
+    private final SessionManager sessionManager = SessionContext.getInstance();
 
     public void login(int userId, int password) {
+
         Staff staff = staffDaoImplement.login(userId, password);
 
         if (staff != null) {
+            sessionManager.login(staff); // 로그인 성공시 세션에 저장
             System.out.println(staff.getUserName() + "안녕하세요.");
 
             Date now = new Date();
@@ -31,41 +35,16 @@ public class StaffServiceImplement implements StaffService {
         return false;
     }
 
+    // 퇴근과 함께 시급 계산
     @Override
     public void finishWork() {
+        if (!sessionManager.isLoggedIn()) {
+            System.out.println("로그인한 사용자가 없습니다.");
+        }
+
+        Staff staff = sessionManager.getCurrentUser();
+        informationDao.finishWork(staff.getUserId());
+        sessionManager.logout();
 
     }
 }
-
-
-//    public boolean isLogin() {
-//        return loggedIn;
-//    }
-//
-//    public void finish() {
-//        if (loggedIn) {
-//            staffController.finishWork();
-//            loggedIn = false;
-//            finishRequested = true;
-//        }
-//    }
-//
-//    public boolean isFinishRequested() {
-//        return finishRequested;
-//    }
-
-//    // 2. 퇴근 처리 메서드
-//    public void finishWork() {
-//        if (loggedInStaff == null) {
-//            System.out.println("현재 로그인한 사원이 없습니다.");
-//            return;
-//        }
-//
-//        infoDao.finishWork(loggedInStaff.getUserId());
-//        loggedInStaff = null; // 세션 초기화
-//    }
-//
-//    // 로그인 상태 확인
-//    public boolean isLoggedIn() {
-//        return loggedInStaff != null;
-//    }
