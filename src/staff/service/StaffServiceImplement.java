@@ -24,18 +24,15 @@ public class StaffServiceImplement implements StaffService {
 
         if (staff != null) {
             sessionManager.login(staff); // 로그인 성공시 세션에 저장
-            System.out.println(staff.getUserName() + "안녕하세요.");
 
             Date now = new Date();
             informationDao.saveLoginInfo(staff.getUserId(), now);
             System.out.println("로그인 시간이 기록되었습니다: " + now);
-
-            return staff;
         } else {
             System.out.println("아이디 또는 비밀번호가 잘못되었습니다.");
-
         }
-        return null;
+
+        return staff;
     }
 
     @Override

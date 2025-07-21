@@ -52,7 +52,7 @@ public class StaffUI implements View {
         output.println("비밀번호를 잘못 입력했습니다.");
     }
 
-    public void showLoginSuccess(Staff userName) {
+    public void showLoginSuccess(String userName) {
         output.println("로그인에 성공했습니다.");
         output.printf("%s님 환영합니다.\n", userName);
         output.println("===========================\n");

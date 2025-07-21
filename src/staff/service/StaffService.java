@@ -1,8 +1,10 @@
 package staff.service;
 
+import staff.entity.Staff;
+
 public interface StaffService {
 
-    void login(int userId, int password);
+    Staff login(int userId, int password);
 
     boolean checkStaffId(int staffId);
 
